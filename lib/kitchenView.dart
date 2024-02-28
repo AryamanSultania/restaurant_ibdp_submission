@@ -87,10 +87,10 @@ class newKitchenViewOrderPageState extends State<newKitchenViewOrderPage> {
           print(snapshot.connectionState);
 
           if (snapshot.data == null || snapshot.data?[0].value == null) {
-            if (snapshot.connectionState == "done") {
+            if (snapshot.connectionState == ConnectionState.done) {
               return loadingDataPlaceholder("No orders have been found.");
             } else {
-              return loadingDataPlaceholder("Loading orders, please wait.");
+              return loadingDataPlaceholder("Connecting, please wait.");
             }
           } else if (snapshot.hasData) {
             final orderItems = snapshot.data?[0].value;
@@ -174,7 +174,7 @@ class newKitchenViewOrderPageState extends State<newKitchenViewOrderPage> {
                             padding: const EdgeInsets.all(16.0),
                             child: SingleChildScrollView(
                               child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   //whole (general) order info
                                   Text(
@@ -186,7 +186,7 @@ class newKitchenViewOrderPageState extends State<newKitchenViewOrderPage> {
                                     style: const TextStyle(fontSize: 20),
                                   ),
                                   Text(
-                                    '${order['extraInfo']["floor"]} — Table ${order['extraInfo']["table"]}',
+                                    '${order['extraInfo']["floor"]} — for ${order['extraInfo']["table"]}',
                                     style: const TextStyle(fontSize: 20),
                                   ),
                                   Text(

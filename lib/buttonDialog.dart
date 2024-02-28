@@ -137,35 +137,38 @@ class _DoubleDropDownState extends State<DoubleDropDown> {
   });
   late String? firstSelectedOption = inputFloors[0];
   late String? previousFirstSelectedOption = inputFloors[0];
-  late String? secondSelectedOption = "1";
+  late String? secondSelectedOption = "Table 1";
   late int indexDropDown;
 
-  late List<String> availableSeats = ["1"];
+  late List<String> availableSeats = ["Table 1"];
 
   @override
   Widget build(BuildContext context) {
     //reset second selection if first option has changed
-    if (previousFirstSelectedOption != firstSelectedOption) {
-      secondSelectedOption = "1";
-    }
+    
     if (firstSelectedOption == "Floor 1") {
-      availableSeats = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
+      availableSeats = ['Table 1', 'Table 2', 'Table 3', 'Table 4', 'Table 5', 'Table 6', 'Table 7', 'Table 8', 'Table 9'];
     } else if (firstSelectedOption == "Floor 2") {
-      availableSeats = ['1', '2', '3', '4', '5', '6', '7'];
+      availableSeats = ['Table 1', 'Table 2', 'Table 3', 'Table 4', 'Table 5', 'Table 6', 'Table 7'];
     } else if (firstSelectedOption == "Floor 3") {
-      availableSeats = ['1', '2', '3', '4', '5', '6', '7', '8'];
+      availableSeats = ['Table 1', 'Table 2', 'Table 3', 'Table 4', 'Table 5', 'Table 6', 'Table 7', 'Table 8'];
     } else if (firstSelectedOption == "Floor 4") {
-      availableSeats = ['1', '2', '3', '4', '5', '6', '7'];
+      availableSeats = ['Table 1', 'Table 2', 'Table 3', 'Table 4', 'Table 5', 'Table 6', 'Table 7'];
     } else if (firstSelectedOption == "Delivery") {
       availableSeats = [
-        '1',
         'Foodpanda',
         'Grab',
         'Lineman',
-        'Service 1',
-        'Service 2',
-        'Service 3'
+        'Service A',
+        'Service B',
+        'Service C',
+        'Service D',
+        'Service E',
       ];
+    }
+    if (previousFirstSelectedOption != firstSelectedOption) {
+      //secondSelectedOption = "1";
+      secondSelectedOption = availableSeats[0];
     }
     previousFirstSelectedOption = firstSelectedOption;
     DropDownVariables.stringFloor = firstSelectedOption.toString();
