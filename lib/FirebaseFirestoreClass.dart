@@ -8,15 +8,15 @@ class FirebaseFirestoreClass {
   late List<String> optionsList;
 
   Future<String> getImageURL(
-    String MainCategory,
-    String SecondaryCategory,
+    String mainCategory,
+    String secondaryCategory,
     String foodID,
   ) async {
     final ref1 = firestoreDatabase
         .collection("items_2")
-        .doc(MainCategory) //"food"
-        .collection(SecondaryCategory) //"main_course"
-        .doc(foodID); //"bird""
+        .doc(mainCategory) //"food"
+        .collection(secondaryCategory) //"mainCourse"
+        .doc(foodID); //"burrito"
     String mainPath = '';
     await ref1.get().then(
       (DocumentSnapshot doc) async {
@@ -43,8 +43,8 @@ class FirebaseFirestoreClass {
     final ref1 = firestoreDatabase
         .collection("items_2")
         .doc(mainCategory) //"food"
-        .collection(secondaryCategory) //"main_course"
-        .doc(foodID); //"bird"
+        .collection(secondaryCategory) //"mainCourse"
+        .doc(foodID); //"burrito"
 
     var returnValue = ref1.get().then(
       (DocumentSnapshot doc) {
@@ -67,8 +67,8 @@ class FirebaseFirestoreClass {
     final ref1 = firestoreDatabase
         .collection("items_2")
         .doc(mainCategory) //"food"
-        .collection(secondaryCategory) //"main_course"
-        .doc(foodID); //"bird"
+        .collection(secondaryCategory) //"mainCourse"
+        .doc(foodID); //"burrito"
 
     var returnValue = ref1.get().then(
       (DocumentSnapshot doc) {

@@ -85,6 +85,7 @@ class newKitchenViewOrderPageState extends State<newKitchenViewOrderPage> {
                 MaterialPageRoute(builder: (_) => kitchenViewOrders()));
           });
           print(snapshot.connectionState);
+          bool noOrdersMessage = false;
 
           if (snapshot.data == null || snapshot.data?[0].value == null) {
             if (snapshot.connectionState == ConnectionState.done) {
@@ -93,6 +94,8 @@ class newKitchenViewOrderPageState extends State<newKitchenViewOrderPage> {
               return loadingDataPlaceholder("Connecting, please wait.");
             }
           } else if (snapshot.hasData) {
+            noOrdersMessage = false;
+
             final orderItems = snapshot.data?[0].value;
             final foodItemList = snapshot.data?[1];
             final orders = orderItems as Map<dynamic, dynamic>;
@@ -160,12 +163,11 @@ class newKitchenViewOrderPageState extends State<newKitchenViewOrderPage> {
                         allItemData = alwaysBlankData;
                       }
                       if (allItemData.toString() == "[]") {
-                        return loadingDataPlaceholder(
-                            "No orders have been found.");
+                        //return loadingDataPlaceholder("No orders have been found.");
                       } else {
                         //help from google gemini to convert the initialTime into HH:mm
                         DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(
-                            DateTime.now().millisecondsSinceEpoch);
+                            order['extraInfo']['submitTime']);
                         final formatter = DateFormat('HH:mm');
                         String timeInHuman = formatter.format(dateTime);
 

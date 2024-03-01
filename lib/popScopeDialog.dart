@@ -36,8 +36,8 @@ class popScopeDialog extends StatelessWidget {
 void _showBackDialog(BuildContext context, int levels, String category) {
   //"are you sure" help from Flutter documentation (https://api.flutter.dev/flutter/widgets/PopScope-class.html)
 
-  late String title = "Leave?";
-  late String content = "You may potentially lose data";
+  late String title = "Are you sure about leaving?";
+  late String content = "You may potentially lose data!";
   late String stayText = "Stay";
   late String exitText = "Leave";
 

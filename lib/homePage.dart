@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:restaurant_ibdp_submission/firebaseAuth.dart';
 import 'package:restaurant_ibdp_submission/navigationMenu.dart';
 import 'buttonDialog.dart';
-
+//main page, select preparer or waiter here
+//seen after auth successful, or when returning to home screen
 class homePage extends StatelessWidget {
   const homePage({super.key});
 
@@ -50,8 +51,8 @@ class homePage extends StatelessWidget {
                 padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
               ),
               SizedBox(
-                width: MediaQuery.of(context).size.width * 0.6,
-                height: MediaQuery.of(context).size.width * 0.2,
+                width: MediaQuery.of(context).size.width * 0.8,
+                height: MediaQuery.of(context).size.height * 0.4,
                 child: ElevatedButton(
                   onPressed: () {
                     selectOrderViewDialog().selectViewDialog(context);
@@ -62,16 +63,16 @@ class homePage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(Icons.dvr,
-                          size: 0.04 * MediaQuery.of(context).size.width),
+                          size: 0.06 * MediaQuery.of(context).size.width),
                       Flexible(
                         //wrap text assist from https://stackoverflow.com/a/55290923
                         child: Text(
-                          "Preparers (Open orders submitted)",
+                          "Preparers (View orders)",
                           textAlign: TextAlign
                               .center, //https://stackoverflow.com/a/53407050
                           style: TextStyle(
                             fontSize:
-                                (0.04 * MediaQuery.of(context).size.width),
+                                (0.06 * MediaQuery.of(context).size.width),
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -89,8 +90,8 @@ class homePage extends StatelessWidget {
                     color: Color.fromARGB(255, 0, 0, 0),
                   )),
               SizedBox(
-                width: MediaQuery.of(context).size.width * 0.6,
-                height: MediaQuery.of(context).size.width * 0.2,
+                width: MediaQuery.of(context).size.width * 0.8,
+                height: MediaQuery.of(context).size.height * 0.4,
                 child: ElevatedButton(
                   onPressed: () {
                     Navigator.push(
@@ -104,7 +105,7 @@ class homePage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(Icons.library_add,
-                          size: 0.04 * MediaQuery.of(context).size.width),
+                          size: 0.06 * MediaQuery.of(context).size.width),
                       Padding(
                           padding: EdgeInsets.fromLTRB(
                               0.04 * MediaQuery.of(context).size.width,
@@ -117,7 +118,7 @@ class homePage extends StatelessWidget {
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize:
-                                (0.04 * MediaQuery.of(context).size.width),
+                                (0.06 * MediaQuery.of(context).size.width),
                             fontWeight: FontWeight.bold,
                           ),
                         ),

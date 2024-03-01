@@ -212,55 +212,59 @@ class FirebaseRealtimeService {
                                       order['customComment'].toString()),
                                   Text(
                                       'Individual Price: ${order['individualPrice']}'),
-                                  Text(
-                                      'Overall price for this item: ${order['itemOverallPrice']}'),
+                                  showOverallPrices(order['individualPrice'], order['itemOverallPrice'], "POS"),
+                                  //Text('Overall price for this item: ${order['itemOverallPrice']}'),
                                   Row(
                                     children: [
-                                      SizedBox(
-                                        width: 0.3 *
-                                            MediaQuery.of(context).size.width,
-                                        //height: 0.95 *MediaQuery.of(context).size.height,
-                                        child: ElevatedButton(
-                                            onPressed: () {
-                                              modifyItemDialog(
-                                                initialTime: initialTime,
-                                                inputChoice: order['choice'],
-                                                inputComment:
-                                                    order['customComment'],
-                                                inputQuantity:
-                                                    order['quantity'],
-                                                itemTime: order['itemTime'],
-                                                path: order['firestorePath'],
-                                                individualPrice:
-                                                    order['individualPrice'],
-                                                levels: levels,
-                                              ).selectPropertyDialog(context);
-                                            },
-                                            child: Text("Modify item",
-                                                style: const TextStyle(
-                                                    color: Colors.orange))),
+                                      Expanded(
+                                        child: SizedBox(
+                                          width: 0.3 *
+                                              MediaQuery.of(context).size.width,
+                                          //height: 0.95 *MediaQuery.of(context).size.height,
+                                          child: ElevatedButton(
+                                              onPressed: () {
+                                                modifyItemDialog(
+                                                  initialTime: initialTime,
+                                                  inputChoice: order['choice'],
+                                                  inputComment:
+                                                      order['customComment'],
+                                                  inputQuantity:
+                                                      order['quantity'],
+                                                  itemTime: order['itemTime'],
+                                                  path: order['firestorePath'],
+                                                  individualPrice:
+                                                      order['individualPrice'],
+                                                  levels: levels,
+                                                ).selectPropertyDialog(context);
+                                              },
+                                              child: Text("Modify item",
+                                                  style: const TextStyle(
+                                                      color: Colors.orange))),
+                                        ),
                                       ),
                                       //Padding(padding: EdgeInsets.fromLTRB(10,0,0,10),),
-                                      SizedBox(
-                                        width: 0.3 *
-                                            MediaQuery.of(context).size.width,
-                                        child: ElevatedButton(
-                                            onPressed: () {
-                                              manageCard().dismissCardDialogUltra(
-                                                  "ordersInProgress/$initialTime/items/${order['itemTime']}",
-                                                  order['name'],
-                                                  context,
-                                                  false,
-                                                  initialTime,
-                                                  levels,
-                                                  selectedView,
-                                                  "N/A",
-                                                  "N/A",
-                                                  "N/A");
-                                            },
-                                            child: const Text("Delete item",
-                                                style: TextStyle(
-                                                    color: Colors.red))),
+                                      Expanded(
+                                        child: SizedBox(
+                                          width: 0.3 *
+                                              MediaQuery.of(context).size.width,
+                                          child: ElevatedButton(
+                                              onPressed: () {
+                                                manageCard().dismissCardDialogUltra(
+                                                    "ordersInProgress/$initialTime/items/${order['itemTime']}",
+                                                    order['name'],
+                                                    context,
+                                                    false,
+                                                    initialTime,
+                                                    levels,
+                                                    selectedView,
+                                                    "N/A",
+                                                    "N/A",
+                                                    "N/A");
+                                              },
+                                              child: const Text("Delete item",
+                                                  style: TextStyle(
+                                                      color: Colors.red))),
+                                        ),
                                       ),
                                     ],
                                   ),

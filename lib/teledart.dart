@@ -6,14 +6,16 @@ class teledartService {
   static late TeleDart teledart;
 
   void initTeledart() {
-    //bot token id and telegram user name
-
+    //bot token id and telegram user name, obtained from t.me/botfather
     var teledart = TeleDart('6769249691:AAGd7KPTTR-lz5BZLMEfGiLUunNpL2M0fDo',
         Event('ibdp_cs_restaurant_bot'));
     teledart.start();
     setTeledart(teledart);
-    //if /id, /ID, or /Id is sent in a chat with this bot added, it will respond with the chat id
-    //this is necessary to tell the bot where to send the messages to
+    ///if /id, /ID, or /Id is sent in a chat with this bot added, it will respond with the chat id
+    ///this is necessary to tell the bot where to send the messages to
+    ///this is only for private groups, if you want to use this with a channel then you have
+    /// to find the chat id through a different way. i found mine by forwarding a message from
+    /// the public channel to @jsondumpbot
     teledart.onMessage(entityType: 'bot_command', keyword: 'ID').listen(
         (message) =>
             teledart.sendMessage(message.chat.id, message.chat.id.toString()));
@@ -32,6 +34,8 @@ class teledartService {
   TeleDart getTeledart() {
     return teledart;
   }
+
+  //make sure the bot has permission to send messages to the person/group/channel!
 
   void sendTelegramMessageWaiter(String inputMessage) {
     TeleDart teledartObtained = teledartService().getTeledart();

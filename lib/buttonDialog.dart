@@ -145,15 +145,50 @@ class _DoubleDropDownState extends State<DoubleDropDown> {
   @override
   Widget build(BuildContext context) {
     //reset second selection if first option has changed
-    
+
     if (firstSelectedOption == "Floor 1") {
-      availableSeats = ['Table 1', 'Table 2', 'Table 3', 'Table 4', 'Table 5', 'Table 6', 'Table 7', 'Table 8', 'Table 9'];
+      availableSeats = [
+        'Table 1',
+        'Table 2',
+        'Table 3',
+        'Table 4',
+        'Table 5',
+        'Table 6',
+        'Table 7',
+        'Table 8',
+        'Table 9'
+      ];
     } else if (firstSelectedOption == "Floor 2") {
-      availableSeats = ['Table 1', 'Table 2', 'Table 3', 'Table 4', 'Table 5', 'Table 6', 'Table 7'];
+      availableSeats = [
+        'Table 1',
+        'Table 2',
+        'Table 3',
+        'Table 4',
+        'Table 5',
+        'Table 6',
+        'Table 7'
+      ];
     } else if (firstSelectedOption == "Floor 3") {
-      availableSeats = ['Table 1', 'Table 2', 'Table 3', 'Table 4', 'Table 5', 'Table 6', 'Table 7', 'Table 8'];
+      availableSeats = [
+        'Table 1',
+        'Table 2',
+        'Table 3',
+        'Table 4',
+        'Table 5',
+        'Table 6',
+        'Table 7',
+        'Table 8'
+      ];
     } else if (firstSelectedOption == "Floor 4") {
-      availableSeats = ['Table 1', 'Table 2', 'Table 3', 'Table 4', 'Table 5', 'Table 6', 'Table 7'];
+      availableSeats = [
+        'Table 1',
+        'Table 2',
+        'Table 3',
+        'Table 4',
+        'Table 5',
+        'Table 6',
+        'Table 7'
+      ];
     } else if (firstSelectedOption == "Delivery") {
       availableSeats = [
         'Foodpanda',
@@ -234,13 +269,11 @@ class addItemToOrderDialog {
   }
 
   Future<dynamic> getDialog(BuildContext context) async {
-    List<String> pathAsList =
-        OptionDropDown(inputChoices: path).splitIntoList(path);
+    List<String> pathAsList = path.split('/');
     String itemType = pathAsList[1];
     String categorySelected = pathAsList[2];
 
-    List<String> choicesAsList =
-        OptionDropDown(inputChoices: choices).splitIntoList(choices);
+    List<String> choicesAsList = choices.split('/');
     List<String> availablePrices = price.split('/');
 
     return showDialog(
@@ -401,6 +434,7 @@ class floorAndTableSelector extends StatelessWidget {
                 tableSpecificToFloor(),
                 ElevatedButton(
                     onPressed: () async {
+                      int submitTime = DateTime.now().millisecondsSinceEpoch;
                       String selectedFloor = DropDownVariables.stringFloor;
                       String selectedTable = DropDownVariables.stringTable;
                       String oldPath = "ordersInProgress/$initialTime";
@@ -414,6 +448,7 @@ class floorAndTableSelector extends StatelessWidget {
                         "floor": selectedFloor,
                         "initialTime": initialTime,
                         "shortOrderID": shortOrderID,
+                        "submitTime": submitTime,
                       });
 
                       FirebaseRealtimeService().copyData(
@@ -552,8 +587,7 @@ class modifyItemDialog {
   }
 
   Future<List<dynamic>> getOptionsPrices(String path) async {
-    List<String> pathAsList =
-        OptionDropDown(inputChoices: path).splitIntoList(path);
+    List<String> pathAsList = path.split('/');
 
     Future<String> availableOptions = FirebaseFirestoreClass()
         .readDocsString(pathAsList[1], pathAsList[2], pathAsList[3], "options");
@@ -728,17 +762,31 @@ class modifyItemDialog {
                 ElevatedButton(
                     onPressed: () {
                       late String commentString = commentController.text;
-                      FirebaseRealtimeService().updateData(
-                        "ordersInProgress/$initialTime/items/$itemTime",
-                        {
-                          "customComment": commentString,
-                        },
-                      );
-                      navigatorPop(context, 2);
 
-                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                        content: Text("Comment has been updated!"),
-                      ));
+                      if (commentString.length < 3 &&
+                          commentString.length != 0) {
+                        //if comment length is less than 3 and is not 0 (if given comment is too short), then prompt to make it longer
+                        basicTextDialog().getTextDialog(
+                            "Custom comment is too short, either delete it or make it longer/more descriptive",
+                            context);
+                      } else {
+                        if (commentString == "") {
+                          commentString = "No comment";
+                        }
+
+                        FirebaseRealtimeService().updateData(
+                          "ordersInProgress/$initialTime/items/$itemTime",
+                          {
+                            "customComment": commentString,
+                          },
+                        );
+                        navigatorPop(context, 2);
+
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(const SnackBar(
+                          content: Text("Comment has been updated!"),
+                        ));
+                      }
                     },
                     child: const Text("Save")),
                 ElevatedButton(
