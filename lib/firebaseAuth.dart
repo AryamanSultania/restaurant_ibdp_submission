@@ -1,4 +1,5 @@
 // ignore_for_file: avoid_web_libraries_in_flutter, use_build_context_synchronously
+//displayed if user is not logged in
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

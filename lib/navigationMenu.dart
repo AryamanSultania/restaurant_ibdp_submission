@@ -232,6 +232,10 @@ class collectionNavigator extends StatelessWidget {
           final collectionsList = availableCollections.split('/');
           final iterateCount = collectionsList.length;
 
+          //named friendly because it's more nice to a human user to see properly capitalised names, not camel casing
+          final friendlyCollections = outputData['friendlyDocuments'];
+          final friendlyList = friendlyCollections.split('/');
+
           return Scaffold(
             appBar: AppBar(title: Text(inputDocument)),
             floatingActionButton:
@@ -239,11 +243,12 @@ class collectionNavigator extends StatelessWidget {
             body: ListView.builder(
               itemCount: iterateCount,
               itemBuilder: (context, index) {
+                final itemNameFriendly = friendlyList[index];
                 final itemName = collectionsList[index];
                 return ListTile(
                   leading: //Text("this is another placeholder"),
                       const SizedBox(),
-                  title: Text(itemName),
+                  title: Text(itemNameFriendly),
                   trailing: ElevatedButton(
                     onPressed: () {
                       Navigator.push(

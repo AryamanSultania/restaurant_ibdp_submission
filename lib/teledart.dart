@@ -40,10 +40,12 @@ class teledartService {
   void sendTelegramMessageWaiter(String inputMessage) {
     TeleDart teledartObtained = teledartService().getTeledart();
     teledartObtained.sendMessage(-1001941628765, inputMessage);
+    //join at https://t.me/waiter_ibdp_restaurant
   }
 
   void sendTelegramMessagePreparer(String inputMessage) {
     TeleDart teledartObtained = teledartService().getTeledart();
     teledartObtained.sendMessage(-1002020806232, inputMessage);
+    //join at https://t.me/preparer_ibdp_restautant
   }
 }

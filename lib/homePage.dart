@@ -1,9 +1,11 @@
+//main page, select preparer or waiter here
+//seen after auth successful, or when returning to home screen
+
 import 'package:flutter/material.dart';
 import 'package:restaurant_ibdp_submission/firebaseAuth.dart';
 import 'package:restaurant_ibdp_submission/navigationMenu.dart';
 import 'buttonDialog.dart';
-//main page, select preparer or waiter here
-//seen after auth successful, or when returning to home screen
+
 class homePage extends StatelessWidget {
   const homePage({super.key});
 

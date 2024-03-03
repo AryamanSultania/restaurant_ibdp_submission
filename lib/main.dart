@@ -1,3 +1,5 @@
+//the first thing that's run when the program starts, redirects from here accordingly
+
 import 'dart:async';
 
 import 'package:flutter/material.dart';
